@@ -17,16 +17,3 @@ require 'views/window_display'
 require 'views/game_display'
 
 Game.new.perform
-
-# board = Board.new
-
-# window = WindowDisplay.set_window
-
-# window.on :mouse_down do |event|
-#   # x and y coordinates of the mouse button event
-#   puts event.x, event.y
-  
-#   puts 'left' if event.button == :left
-# end
-
-# WindowDisplay.show_window(Menus.welcome_screen(window))

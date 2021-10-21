@@ -30,9 +30,7 @@ module UI
     play_button_text(window)
   end
 
-  private
-
-  def self.button_frame(window, players, game_display)
+  def self.button_frame(window, _players, game_display)
     button_frame_borders(window)
     button_frame_lines(window)
     button_background(window)

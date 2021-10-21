@@ -43,9 +43,7 @@ class GameDisplay
         menu_detect(button, event)
       else
         @squares.each_with_index do |square, id|
-          if square.contains?(event.x, event.y)
-            play(id)
-          end
+          play(id) if square.contains?(event.x, event.y)
         end
       end
     end
@@ -65,10 +63,42 @@ class GameDisplay
     when '?'
       @turn += 1
       gameplay
-    when 'X' then puts 'X Gagne !'
-    when 'O' then puts 'O Gagne !'
-    when 'tie' then puts 'Match nul'
+    when 'X' then winning_screen(0)
+    when 'O' then winning_screen(1)
+    when 'tie' then tie_screen
     end
+  end
+
+  def winning_screen(player_id)
+    @window.clear
+    welcome_screen_characters
+    @window.add(winning_message(player_id))
+  end
+
+  def winning_message(player_id)
+    Text.new(
+      "#{@players[player_id].name} a gagne !",
+      x: 200, y: 120,
+      font: './fonts/press_start_2p.ttf',
+      size: 20,
+      color: 'white'
+    )
+  end
+
+  def tie_screen
+    @window.clear
+    welcome_screen_characters
+    @window.add(tie_message)
+  end
+
+  def tie_message
+    Text.new(
+      "Match nul !",
+      x: 200, y: 120,
+      font: './fonts/press_start_2p.ttf',
+      size: 20,
+      color: 'white'
+    )
   end
 
   def menu_detect(button, event)
@@ -98,8 +128,8 @@ class GameDisplay
 
   def place_collision_blocks
     squares = []
-    for j in 0..2
-      for i in 0..2
+    (0..2).each do |j|
+      (0..2).each do |i|
         x = i * 80 + 280
         y = j * 80 + 280
         squares << Square.new(x: x, y: y, size: 80, color: 'red')
@@ -115,27 +145,27 @@ class GameDisplay
 
   def show_turn_of
     @window.add(Text.new(
-      'Au tour de',
-      x: 280, y: 80,
-      font: './fonts/press_start_2p.ttf',
-      size: 20,
-      color: 'white'
-    ))
+                  'Au tour de',
+                  x: 280, y: 80,
+                  font: './fonts/press_start_2p.ttf',
+                  size: 20,
+                  color: 'white'
+                ))
   end
 
   def show_player
     @window.add(Text.new(
-      @players[@turn % 2].name,
-      x: 280, y: 120,
-      font: './fonts/press_start_2p.ttf',
-      size: 32,
-      color: 'white'
-    ))
+                  @players[@turn % 2].name,
+                  x: 280, y: 120,
+                  font: './fonts/press_start_2p.ttf',
+                  size: 32,
+                  color: 'white'
+                ))
   end
 
   def show_board
-    for j in 0..2
-      for i in 0..2
+    (0..2).each do |j|
+      (0..2).each do |i|
         x = i * 80 + 296
         y = j * 80 + 296
         @window.add(define_board_symbols(j, i, x, y))
@@ -154,23 +184,23 @@ class GameDisplay
   end
 
   def select_tiles(tiles)
-    for j in 0..2
-      for i in 0..2
+    (0..2).each do |j|
+      (0..2).each do |i|
         x = i * 80 + 280
         y = j * 80 + 280
         tiles.set_tile("floor_#{rand(1..8)}", [{ x: x, y: y }])
       end
     end
-    
+
     tiles
   end
 
   def welcome_screen_overtitle
     Text.new(
       'Bienvenue dans',
-      x: 300, y: 80,
-      font: './fonts/DungeonFont.ttf',
-      size: 32,
+      x: 270, y: 80,
+      font: './fonts/press_start_2p.ttf',
+      size: 20,
       color: 'white'
     )
   end
