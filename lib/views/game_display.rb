@@ -10,6 +10,9 @@ class GameDisplay
     @squares = place_collision_blocks
     @menu = true
     @turn = 0
+    @hit_sound = Sound.new('./media/hit.wav')
+    @morpion_music = Music.new('./media/morpion.wav')
+    reset_toggle
   end
 
   def self.player_name(player_number)
@@ -23,12 +26,15 @@ class GameDisplay
     @window.add(welcome_screen_overtitle)
     @window.add(welcome_screen_title)
     UI.add_play_button(@window, @players, self)
+    @morpion_music.loop = true
+    @morpion_music.play
 
     @window
   end
 
   def gameplay
     @window.clear
+    @morpion_music.fadeout(500)
     welcome_screen_characters
     show_tiles
     show_turn_of
@@ -54,6 +60,7 @@ class GameDisplay
     x = id % 3
     if @board.free_square?(y, x)
       @board.play_move(y, x, @players[@turn % 2].symbol)
+
       next_turn
     end
   end
@@ -62,6 +69,7 @@ class GameDisplay
     case @board.check_for_win
     when '?'
       @turn += 1
+      @hit_sound.play
       gameplay
     when 'X' then winning_screen(0)
     when 'O' then winning_screen(1)
@@ -73,6 +81,8 @@ class GameDisplay
     @window.clear
     welcome_screen_characters
     @window.add(winning_message(player_id))
+    @window.add(reset_game_text)
+    @morpion_music.play
   end
 
   def winning_message(player_id)
@@ -89,6 +99,8 @@ class GameDisplay
     @window.clear
     welcome_screen_characters
     @window.add(tie_message)
+    @window.add(reset_game_text)
+    @morpion_music.play
   end
 
   def tie_message
@@ -101,11 +113,34 @@ class GameDisplay
     )
   end
 
+  def reset_game_text
+    Text.new(
+      'Appuie sur r pour rejouer',
+      x: 200, y: 200,
+      font: './fonts/press_start_2p.ttf',
+      size: 16,
+      color: 'white'
+    )
+  end
+
   def menu_detect(button, event)
     if button.contains?(event.x, event.y)
       gameplay
       @menu = false
     end
+  end
+
+  def reset_toggle
+    @window.on :key_down do |event|
+      reset_game if event.key == 'r'
+    end
+  end
+
+  def reset_game
+    @turn = 0
+    @board = Board.new
+    @window.clear
+    gameplay
   end
 
   private
