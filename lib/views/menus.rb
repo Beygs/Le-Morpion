@@ -11,6 +11,7 @@ module Menus
     welcome_screen_characters(window)
     window.add(welcome_screen_overtitle)
     window.add(welcome_screen_title)
+    UI.add_play_button(window)
     window
   end
 
