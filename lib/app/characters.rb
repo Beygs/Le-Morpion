@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module qui regroupe tous les personnages
 module Characters
   CHARACTERS_LIST = {
     tiny_zombie: Character.new(368, 16, 432, 16).sprite,

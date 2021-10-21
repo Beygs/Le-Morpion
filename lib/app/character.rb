@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Classe permettant de créer un personnage et de mettre en place ses animations
 class Character
   attr_accessor :sprite
 

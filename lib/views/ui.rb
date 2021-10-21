@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module qui gère l'affichage du bouton Jouer
 module UI
   FRAME_BORDER = Image.new(
     './media/frame_border.png',

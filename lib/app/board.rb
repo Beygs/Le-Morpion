@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Classe qui gère tout ce qui a un rapport avec le jeu dans la grille de morpion
 class Board
   attr_accessor :board_array
 

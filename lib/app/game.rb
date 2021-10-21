@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Classe qui gère le déroulement général et le début du setup du jeu
 class Game
   def initialize
     @players = []

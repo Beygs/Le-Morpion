@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Setup de la fenêtre et fonction d'affichage de cette dernière
 module WindowDisplay
   def self.set_window
     window = Window.new

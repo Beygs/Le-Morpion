@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module qui met en place la texture des tuiles de la grille de jeu
 module Environment
   def self.create_tileset
     Tileset.new(

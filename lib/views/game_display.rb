@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Classe qui gère tout l'affichage dans la fenêtre et la logique générale du jeu
 class GameDisplay
   attr_accessor :window
 
@@ -146,7 +147,7 @@ class GameDisplay
   private
 
   def welcome_screen_characters
-    GraphicElements::CHARACTERS.each_with_index do |(_name, sprite), i|
+    Characters::CHARACTERS_LIST.each_with_index do |(_name, sprite), i|
       sprite.y = 80 + ((i % 6) * 80)
       if i < 6
         sprite.x = 120
