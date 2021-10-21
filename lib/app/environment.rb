@@ -8,7 +8,7 @@ module Environment
       tile_height: 16,
       padding: 16,
       spacing: 0,
-      scale: 3
+      scale: 5
     )
   end
 

@@ -25,21 +25,30 @@ module UI
     height: 80
   )
 
-  def self.add_play_button(window)
-    add_button(window)
+  def self.add_play_button(window, players, game_display)
+    button_frame(window, players, game_display)
     play_button_text(window)
   end
 
   private
 
-  def self.add_button(window)
-    button_frame(window)
-  end
-
-  def self.button_frame(window)
+  def self.button_frame(window, players, game_display)
     button_frame_borders(window)
     button_frame_lines(window)
     button_background(window)
+    collision = add_button_collision
+    detect_click(game_display, collision)
+  end
+
+  def self.add_button_collision
+    Rectangle.new(
+      x: 296, y: 336,
+      width: 200, height: 80
+    )
+  end
+
+  def self.detect_click(game_display, button)
+    game_display.detect_click(button)
   end
 
   def self.button_background(window)

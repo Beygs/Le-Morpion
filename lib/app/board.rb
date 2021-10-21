@@ -13,14 +13,23 @@ class Board
     row[x] = symbol
   end
 
+  def still_playing?
+    check_for_win == nil && tie? == false
+  end
+
+  def free_square?(y, x)
+    @board_array[y][x] == ' '
+  end
+
   def check_for_win
     unless tie?
       col = check_columns
       row = check_rows
       dia = check_diagonals
       return col unless col.nil?
-      return row unless col.nil?
-      return dia
+      return row unless row.nil?
+      return dia unless dia.nil?
+      return '?'
     end
     'tie'
   end
@@ -62,9 +71,9 @@ class Board
   end
 
   def tie?
-    for i in 0..3
-      return true if @board_array[i].include?(' ')
+    for i in 0..2
+      return false if @board_array[i].include?(' ')
     end
-    false
+    true
   end
 end

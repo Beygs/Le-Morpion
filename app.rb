@@ -5,6 +5,7 @@ Bundler.require
 
 $LOAD_PATH.unshift File.expand_path('lib', __dir__)
 
+require 'app/game'
 require 'app/player'
 require 'app/character'
 require 'app/characters'
@@ -13,20 +14,19 @@ require 'app/graphic_elements'
 require 'app/board'
 require 'app/ui'
 require 'views/window_display'
-require 'views/menus'
 require 'views/game_display'
 
-board = Board.new
+Game.new.perform
 
-# binding.pry
+# board = Board.new
 
-window = WindowDisplay.set_window
+# window = WindowDisplay.set_window
 
-window.on :mouse_down do |event|
-  # x and y coordinates of the mouse button event
-  puts event.x, event.y
+# window.on :mouse_down do |event|
+#   # x and y coordinates of the mouse button event
+#   puts event.x, event.y
   
-  puts 'left' if event.button == :left
-end
+#   puts 'left' if event.button == :left
+# end
 
-WindowDisplay.show_window(Menus.welcome_screen(window))
+# WindowDisplay.show_window(Menus.welcome_screen(window))
